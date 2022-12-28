@@ -1,0 +1,7 @@
+/.idea
+/.vscode
+/.docker-*
+/node_modules
+/storage/*.key
+/vendor
+.env

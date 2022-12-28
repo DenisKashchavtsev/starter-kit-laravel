@@ -1,0 +1,26 @@
+version: '2'
+services:
+  php-apache-dev:
+    image: 'webdevops/php-apache-dev:8.1'
+    links:
+      - 'mysql:mysql'
+    volumes:
+      - './:/app'
+    ports:
+      - '80:80'
+    depends_on:
+      - mysql
+    environment:
+      - PHP_DISPLAY_ERRORS=1
+      - extension
+      - 'WEB_PHP_SOCKET=127.0.0.1:9000'
+      - WEB_DOCUMENT_ROOT=/app/public
+  mysql:
+    image: 'mysql:8'
+    environment:
+      - MYSQL_ROOT_PASSWORD=demo1234
+      - MYSQL_DATABASE=db
+    volumes:
+      - './.docker-mysql:/var/lib/mysql'
+    ports:
+      - '3306:3306'
