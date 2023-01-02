@@ -5,3 +5,5 @@
 /storage/*.key
 /vendor
 .env
+/.phpunit.result.cache
+/.postgresql-mysql/

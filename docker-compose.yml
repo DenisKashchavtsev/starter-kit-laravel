@@ -4,6 +4,7 @@ services:
     image: 'webdevops/php-apache-dev:8.1'
     links:
       - 'mysql:mysql'
+      - 'postgres:postgres'
     volumes:
       - './:/app'
     ports:
@@ -24,3 +25,13 @@ services:
       - './.docker-mysql:/var/lib/mysql'
     ports:
       - '3306:3306'
+  postgres:
+    image: 'postgres'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=demo1234
+      - POSTGRES_DB=db
+    volumes:
+      - './.postgresql-mysql:/var/lib/postgresql'
+    ports:
+      - '5432:5432'

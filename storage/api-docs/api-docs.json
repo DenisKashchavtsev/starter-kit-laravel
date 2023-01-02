@@ -1,0 +1,142 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Starter Kit Laravel Api Documentation",
+        "contact": {
+            "email": "dkashavtsev@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/api/v1",
+            "description": "Starter Kit Laravel API Server"
+        }
+    ],
+    "paths": {
+        "/admin/tokens": {
+            "post": {
+                "tags": [
+                    "Tokens"
+                ],
+                "summary": "Store new token",
+                "operationId": "storeToken",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreTokenRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Tokens"
+                ],
+                "summary": "Delete existing token",
+                "description": "Deletes a record and returns no content",
+                "operationId": "deleteToken",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DestroyTokenRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Undocumented"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "DestroyTokenRequest": {
+                "title": "Destroy Token request",
+                "description": "Destroy Token request body data",
+                "required": [
+                    "device_name"
+                ],
+                "properties": {
+                    "device_name": {
+                        "schema": "DestroyTokenRequest",
+                        "title": "Device name",
+                        "type": "string",
+                        "example": "test"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreTokenRequest": {
+                "title": "Store Token request",
+                "description": "Store Token request body data",
+                "required": [
+                    "email",
+                    "password",
+                    "device_name"
+                ],
+                "properties": {
+                    "email": {
+                        "schema": "StoreTokenRequest",
+                        "title": "Email",
+                        "type": "string",
+                        "example": "admin@admin.com"
+                    },
+                    "password": {
+                        "schema": "StoreTokenRequest",
+                        "title": "Password",
+                        "type": "string",
+                        "example": "demo1234"
+                    },
+                    "device_name": {
+                        "schema": "StoreTokenRequest",
+                        "title": "Device name",
+                        "type": "string",
+                        "example": "test"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Tokens",
+            "description": "Auth Endpoints"
+        }
+    ]
+}
