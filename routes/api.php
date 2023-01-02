@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\V1\Admin\TokenController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('v1')->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::post('tokens', [TokenController::class, 'store']);
+
+        Route::middleware('auth:sanctum')->group(function () {
+            Route::delete('tokens', [TokenController::class, 'destroy']);
+
+        });
+    });
 });
